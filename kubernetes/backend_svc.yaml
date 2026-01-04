@@ -5,9 +5,9 @@ metadata:
 spec:
   selector:
     server: backend
-    ports:
-       - port: 8080
-         targetPort: 8080
-         protocol: tcp
-         nodePort: 31100
-    type: NodePort     
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 31100
+  type: NodePort     

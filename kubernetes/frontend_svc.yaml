@@ -5,8 +5,9 @@ metadata:
 spec:
   selector:
     server: frontend
-    ports:
-      - port: 5173
-        targetPort: 5173
-        protocol: tcp
-    type: NodePort     
+  ports:
+    - port: 5173
+      targetPort: 5173
+      protocol: TCP
+      nodePort: 31542
+  type: NodePort     

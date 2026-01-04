@@ -1,30 +1,29 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: redis-deployment
     labels:
-       matchLabels:
-          app: redis
+       app: redis 
 spec:
-     metadata:
-       name: redis
-       selectors:
+       replicas: 1
+       selector:
           matchLabels:
              app: redis
        template:
           metadata:
-              name: redis
+            labels:
+              app: redis
           spec: 
               containers:
-                 name: redis-cont
-                 image: redis:latest
-                 ports: 
-                   - containerPort: 6379
-                 volumeMounts:
-                   - name: redisVolume
-                     mountPath: /data
+                - name: redis-cont
+                  image: redis:latest
+                  ports: 
+                    - containerPort: 6379
+                  volumeMounts:
+                    - name: redis-volume
+                      mountPath: /data
               volumes:
-                 - name: redisVolume
+                 - name: redis-volume
                    persistentVolumeClaim:
                      claimName: pvc
        
