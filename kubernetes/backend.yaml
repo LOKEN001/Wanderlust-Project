@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+   name: backend
+   labels:
+     server: backend
+spec:
+     replica: 1
+     selectors:
+       matchLabels:
+         server: backend
+     template:
+       metadata:
+          name: backend
+       spec:
+          containers:
+            name: backend-cont
+            image: master101/wanderlust-project_backend:latest
+            ports:
+              - containerPort: 8080    
