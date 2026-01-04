@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  dynamodb:
+    container_name: dynamoDB
+    image: mongo:latest
+    ports: 
+      - "27017:27017"
+    volumes:
+      - ./backend/data:/data
+
+  frontend:
+    container_name: wanderlust-fontend
+    build: ./frontend
+    env_file: 
+      - ./frontend/.env.docker  
+    ports:
+      - "5173:5173"
+    
+  backend:
+    container_name: wanderlust-backend
+    build: ./backend
+    env_file: 
+      - ./backend/.env.docker  
+    ports:
+      - "31100:8080"
+    depends_on:
+      - dynamodb
+
+  redis:
+    container_name: redis-cache
+    restart: unless-stopped  
+    image: redis:7.0.5-alpine
+    ports:
+      - "6379:6379"
+    depends_on:
+      - dynamodb
+
+volumes:
+   data:
